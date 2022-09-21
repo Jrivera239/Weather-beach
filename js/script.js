@@ -15,9 +15,19 @@ function weatherTep(val)
 }
     btn.addEventListener('click', function()
 {
-        fetch('https://api.openweathermap.org/data/2.5/weather?q='+input.value+'&appid='+API)
-        .then(res => res.json()).then(data => {
-            var name = data['name'];
-            var humidity = data['main'] ['humidity']  ;
-            var temp = data['main'] ['temperature'];
-            var windspeed = data['speed'] ['wind'];
+fetch('https://api.openweathermap.org/data/2.5/weather?q='+input.value+'&appid='+API)
+.then(res => res.json()).then(data => {
+var name = data['name'];
+var humidity = data['main'] ['humidity']  ;
+var temp = data['main'] ['temperature'];
+var windspeed = data['speed'] ['wind'];
+
+    city.innerHTML=`City: ${nameval}`
+    wind.innerHTML = `Wind: ${wndspd} km/h`
+    description.innerHTML = `Huminity: ${humidity}%`
+    temp.innerHTML = `Temperature: ${ convertion(tempature)} C`
+    })
+        .catch(err => alert('Please enter a valid city name'))
+        localStorage.setItem("inputval.value" , "city")
+        
+    })
