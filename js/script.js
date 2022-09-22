@@ -6,6 +6,7 @@ var cityInput = $('#city-input');
 var cityTitle = $('#city-title');
 var searchBTN = $('#search-button');  
 var humidifier = $('#today-humidity');
+var temperature = $('#today-temp');
 var windy = $('#today-wind');
 var uvindex = $('#today-uvindex');
 var fiveDayForecast = $('#FiveDay');
@@ -63,3 +64,18 @@ $('.modal').modal();
                 }
             });
         
+
+            function producecurrent() {
+                date = new Date().toLocaleDateString('en-US');
+                iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
+                var img = $('<img>');
+                img.attr('src', iconUrl);
+                cityTitle.text(city + "  (" + date + ")  ");
+                cityTitle.append(img);
+                temperature.text(temp + "\u00B0F");
+                windy.text(wind + " MPH");
+                humidifier.text(humidifier + "%");
+                uvindex.text(uvi);
+                cityInput.val("");
+            }
+            
