@@ -29,53 +29,90 @@ $('.modal').modal();
     function Url(city) {
         APIUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&exclude=minutely,hourly,daily,alerts" + APIK;
         let response = fetch(APIUrl).then(function(response){
-            if(response.ok) {
-                response.json().then(function(data) {
-                    APIUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly,alerts&units=imperial" + APIK;
-                }).then(function() {
-                    setValues(APIUrl);
-                });
-            } else {
-                return;
-            }
-        });
+           if(response.ok) {
+               response.json().then(function(data) {
+                  APIUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon +"&exclude=minutely,hourly,alerts&units=imperial" + APIK;
+             }).then(function() {
+                setValues(APIUrl);
+             });
+        } else {
+        return;
+     }
+ });
 
         // Values (temp,humidiy,wind,uvi,etc) //
-        function setValues(apiUrl) {
-            let response = fetch(apiUrl).then(function(response) {
-                if(response.ok) {
-                    response.json().then(function(data) {
-                      
-                        temp = data.today.temp;
-                        humidity = data.today.humidity;
-                        wind = data.today.wind_speed;
-                        uvi = data.today.uvi;
-                        icon = data.today.weather[0].icon;
-                        fiveDay = [];
-                        for(var i = 0; i < 5; i++) {
-                            fiveDay.push(data.daily[i]);
-                        }
-                    }).then(function() {
-                        produceCurrent();
-                        produceFiveDay();
-                    });
-                } else {
-                    return;
-                }
-            });
+function setValues(apiUrl) {
+let response = fetch(apiUrl).then(function(response) {
+    if(response.ok) {
+        response.json().then(function(data) {
+        temp = data.today.temp;
+         humidity = data.today.humidity;
+        wind = data.today.wind_speed;
+        uvi = data.today.uvi;
+        icon = data.today.weather[0].icon;
+        fiveDay = [];
+        for(var i = 0; i < 7; i++) {
+        fiveDay.push(data.daily[i]);
+         }
+        }).then(function() {
+        produceCurrent();
+        produceSevenDay();
+        });
+        } else {
+            return;
+        }
+    });
         
 
-            function producecurrent() {
-                date = new Date().toLocaleDateString('en-US');
-                iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
-                var img = $('<img>');
-                img.attr('src', iconUrl);
-                cityTitle.text(city + "  (" + date + ")  ");
-                cityTitle.append(img);
-                temperature.text(temp + "\u00B0F");
-                windy.text(wind + " MPH");
-                humidifier.text(humidifier + "%");
-                uvindex.text(uvi);
-                cityInput.val("");
-            }
-            
+ function producecurrent() {
+    date = new Date().toLocaleDateString('en-US');
+    iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
+    var img = $('<img>');
+    img.attr('src', iconUrl);
+    cityTitle.text(city + "  (" + date + ")  ");
+    cityTitle.append(img);
+    temperature.text(temp + "\u00B0F");
+    windy.text(wind + " MPH");
+    humidifier.text(humidifier + "%");
+    uvindex.text(uvi);
+    cityInput.val("");
+    }
+function SevenDay() {
+    date = new Date();
+    $('#SevenDays').empty();
+    for(var i = 0; i < 7; i++) {
+        icon = SevenDayForecast[i].weather[0].icon;
+        temp = SevenDayForecast[i].temp.day;
+        humidity = SevenDayForecast[i].humidity;
+        wind = SevenDayForecast[i].wind_speed;
+        
+        iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
+        date.setDate(date.getDate() + 1);
+
+        var divCard = $('<div>').addClass("col s6 m4 l2 single-day-forecast white white-text center forecast");
+        var title = $('<h5>').addClass("flow-text").text(date.toLocaleDateString('en-US'));
+        var img = $('<img>').attr('src', iconUrl);
+        var cardTemp = $('<p>').text("Temp: " + temperature + "\u00B0F");
+        var cardWind = $('<p>').text("Wind: " + windy + " MPH");
+        var cardHumidity = $('<p>').text("Humidity: " + humidifier + "%");
+
+        divColumn.append(title);
+        divColumn.append(img);
+        divColumn.append(cardTemp);
+        divColumn.append(cardWind);
+        divColumn.append(cardHumidity);
+
+        SevenDayForecastEl.append(divCard);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
