@@ -24,7 +24,7 @@ var icon;
 var fiveDayForecast = [];
 
 $('.modal').modal();
-    
+    // calling API Key //
     function Url(city) {
         APIUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&exclude=minutely,hourly,daily,alerts" + APIK;
         let response = fetch(APIUrl).then(function(response){
@@ -38,4 +38,19 @@ $('.modal').modal();
                 return;
             }
         });
-    
+
+        // Values (temp,humidiy,wind,uvi,etc) //
+        function setValues(apiUrl) {
+            let response = fetch(apiUrl).then(function(response) {
+                if(response.ok) {
+                    response.json().then(function(data) {
+                      
+                        temp = data.today.temp;
+                        humidity = data.today.humidity;
+                        wind = data.today.wind_speed;
+                        uvi = data.today.uvi;
+                        icon = data.today.weather[0].icon;
+                        fiveDay = [];
+                        for(var i = 0; i < 5; i++) {
+                            fiveDayForecast.push(data.daily[i]);
+                            
