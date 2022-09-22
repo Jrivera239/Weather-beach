@@ -10,7 +10,7 @@ var temperature = $('#today-temp');
 var windy = $('#today-wind');
 var uvindex = $('#today-uvindex');
 var fiveDayForecast = $('#FiveDay');
-var previousSearchesEl = $('#previous-searches');
+var PreviousSearches = $('#previous-searches');
 
 var APIUrl = "";
 var iconUrl = "";
@@ -89,22 +89,62 @@ function SevenDay() {
         iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
         date.setDate(date.getDate() + 1);
 
-        var divCard = $('<div>').addClass("col s6 m4 l2 single-day-forecast white white-text center forecast");
-        var title = $('<h5>').addClass("flow-text").text(date.toLocaleDateString('en-US'));
-        var img = $('<img>').attr('src', iconUrl);
-        var cardTemp = $('<p>').text("Temp: " + temperature + "\u00B0F");
-        var cardWind = $('<p>').text("Wind: " + windy + " MPH");
-        var cardHumidity = $('<p>').text("Humidity: " + humidifier + "%");
+var divCard = $('<div>').addClass("col s6 m4 l2 single-day-forecast white white-text center forecast");
+var title = $('<h5>').addClass("flow-text").text(date.toLocaleDateString('en-US'));
+var img = $('<img>').attr('src', iconUrl);
+var cardTemp = $('<p>').text("Temp: " + temperature + "\u00B0F");
+var cardWind = $('<p>').text("Wind: " + windy + " MPH");
+var cardHumidity = $('<p>').text("Humidity: " + humidifier + "%");
 
         divColumn.append(title);
         divColumn.append(img);
         divColumn.append(cardTemp);
         divColumn.append(cardWind);
         divColumn.append(cardHumidity);
-
         SevenDayForecastEl.append(divCard);
     }
 }
+
+function SearchHistory() {
+    if(!searchHistory.includes(city)) {
+        searchHistory.push(city);
+        console.log(searchHistory);
+        localStorage.setItem("searches", JSON.stringify(searchHistory));
+        var BTN = $('<a>').addClass("btn white black-text hoverable").text(city);
+        PreviousSearches.append(BTN);
+    }  
+}
+
+function BeginSearches() {
+    for(var i = 0; i < searchHistory.length; i++) {
+        var BTN = $('<a>').addClass("btn white black-text hoverable").text(searchHistory[i]);
+        PreviousSearches.append(BTN);
+    }
+}
+
+function LoadSearches() {
+    var savedSearches = localStorage.getItem("searches");
+    if(!savedSearches) {
+        searchHistory = [];
+    } else {
+        searchHistory = JSON.parse(savedSearches);
+        city = searchHistory[0];
+        Url(city);
+    }
+
+    BeginSearches();
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
