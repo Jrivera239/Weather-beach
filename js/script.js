@@ -52,5 +52,14 @@ $('.modal').modal();
                         icon = data.today.weather[0].icon;
                         fiveDay = [];
                         for(var i = 0; i < 5; i++) {
-                            fiveDayForecast.push(data.daily[i]);
-                            
+                            fiveDay.push(data.daily[i]);
+                        }
+                    }).then(function() {
+                        produceCurrent();
+                        produceFiveDay();
+                    });
+                } else {
+                    return;
+                }
+            });
+        
