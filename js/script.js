@@ -101,7 +101,7 @@ var cardHumidity = $('<p>').text("Humidity: " + humidifier + "%");
         divColumn.append(cardTemp);
         divColumn.append(cardWind);
         divColumn.append(cardHumidity);
-        SevenDaysForecastEl.append(divCard);
+        SevenDaysForecast.append(divCard);
     }
 }
 
@@ -110,15 +110,15 @@ function SearchHistory() {
         searchHistory.push(city);
         console.log(searchHistory);
         localStorage.setItem("searches", JSON.stringify(searchHistory));
-        var BTN = $('<a>').addClass("btn white black-text hoverable").text(city);
-        PreviousSearches.append(BTN);
+        var preBTN = $('<a>').addClass("btn black black-text hoverable").text(city);
+        PreviousSearches.append(preBTN);
     }  
 }
 
 function BeginSearches() {
     for(var i = 0; i < searchHistory.length; i++) {
-        var BTN = $('<a>').addClass("btn white black-text hoverable").text(searchHistory[i]);
-        PreviousSearches.append(BTN);
+        var preBTN = $('<a>').addClass("btn black black-text hoverable").text(searchHistory[i]);
+        PreviousSearches.append(preBTN);
     }
 }
 
@@ -167,8 +167,8 @@ searchBTN.click(function() {
     }
 });   
 
-previousSearchesEl.click(function(event) {
-    resetValues();
+previousSearches.click(function(event) {
+    Values();
     cities = event.target.textContent;
     generateUrl(cities);
 });
