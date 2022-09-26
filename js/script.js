@@ -11,6 +11,7 @@ var windy = $('#today-wind');
 var uvindex = $('#today-uvindex');
 var SevenDaysForecast = $('#SevenDays');
 var PreviousSearches = $('#previous-searches');
+var modalText = $('#modal-message');
 
 var APIUrl = "";
 var iconUrl = "";
@@ -36,15 +37,17 @@ $('.modal').modal();
                 setValues(APIUrl);
              });
         } else {
+            Modal("Please try again. " + response.status);
+            return;
         return;
      }
  });
 
         // Values (temp,humidiy,wind,uvi,etc) //
-function setValues(apiUrl) {
-let launch = fetch(apiUrl).then(function(launch) {
-    if(launch.ok) {
-        launch.json().then(function(data) {
+function setValues(APIUrl) {
+let response = fetch(APIUrl).then(function(response) {
+    if(response.ok) {
+        response.json().then(function(data) {
         icon = data.today.weather[0].icon;    
         temp = data.today.temp;
          humidity = data.today.humidity;
@@ -59,6 +62,8 @@ let launch = fetch(apiUrl).then(function(launch) {
         produceSevenDays();
         });
         } else {
+            showModal("Please try again. " + response.status);
+            }
             return;
         }
     });
@@ -72,7 +77,7 @@ let launch = fetch(apiUrl).then(function(launch) {
     cityTitle.text(city + "  (" + date + ")  ");
     cityTitle.append(img);
     temperature.text(temp + "\u00B0F");
-    windy.text(wind + " MPH");
+    windy.text(windy + " MPH");
     humidifier.text(humidifier + "%");
     uvindex.text(uvi);
     cityInput.val("");
@@ -82,9 +87,9 @@ function SevenDays() {
     $('#SevenDays').empty();
     for(var i = 0; i < 7; i++) {
         icon = SevenDaysForecast[i].weather[0].icon;
-        temp = SevenDaysForecast[i].temp.day;
-        humidity = SevenDaysForecast[i].humidity;
-        wind = SevenDaysForecast[i].wind_speed;
+        temperature = SevenDaysForecast[i].temperature.day;
+        humidifier = SevenDaysForecast[i].humidifier;
+        windy = SevenDaysForecast[i].windy_speed;
         
         iconUrl = "http://openweathermap.org/img/wn/" + icon + ".png";
         date.setDate(date.getDate() + 1);
@@ -93,13 +98,13 @@ var divCard = $('<div>').addClass("col s6 m4 l2 single-day-forecast white white-
 var title = $('<h5>').addClass("flow-text").text(date.toLocaleDateString('en-US'));
 var img = $('<img>').attr('src', iconUrl);
 var cardTemp = $('<p>').text("Temp: " + temperature + "\u00B0F");
-var cardWind = $('<p>').text("Wind: " + windy + " MPH");
+var cardWindy = $('<p>').text("Wind: " + windy + " MPH");
 var cardHumidity = $('<p>').text("Humidity: " + humidifier + "%");
 
         divColumn.append(title);
         divColumn.append(img);
         divColumn.append(cardTemp);
-        divColumn.append(cardWind);
+        divColumn.append(cardWindy);
         divColumn.append(cardHumidity);
         SevenDaysForecast.append(divCard);
     }
@@ -135,11 +140,11 @@ function LoadSearches() {
     BeginSearches();
 }
 
-function showModal(texto) {
-    var modales = M.Modales.getInstance($('.modal'));
-    inputEl.val("");
-    modalesText.text(texto);
-    modales.open();
+function showModal(text) {
+    var modal = M.Modal.getInstance($('.modal'));
+    cityInput.val("");
+    modalText.text(text);
+    modal.open();
 }
 
 function Values() {
@@ -152,15 +157,15 @@ wind = "";
 humidity = "";
 uvi = "";
 SevenDaysForecast = [];
-SevenDaysForecastEl.empty();
+SevenDaysForecast.empty();
 cityInput.val("");
 }
 
 searchBTN.click(function() {
     cities = cityInput.val().trim();
     if(cities) {
-        generateUrl(cities);
-        addToHistory();
+        Url(cities);
+        SearchHistory();
     } else {
         showModal("Try adding a ciy, perhaps?");
         return;
@@ -170,7 +175,7 @@ searchBTN.click(function() {
 previousSearches.click(function(event) {
     Values();
     cities = event.target.textContent;
-    generateUrl(cities);
+    Url(cities);
 });
 
 LoadSearches();
