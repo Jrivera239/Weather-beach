@@ -135,6 +135,26 @@ function LoadSearches() {
     BeginSearches();
 }
 
+function showModal(texto) {
+    var modales = M.Modales.getInstance($('.modal'));
+    inputEl.val("");
+    modalesText.text(texto);
+    modales.open();
+}
+
+function Values() {
+icon = "";
+iconUrl = "";
+apiUrl = "";
+city = "";    
+temp = "";
+wind = "";
+humidity = "";
+uvi = "";
+SevenDayForecast = [];
+SevenDayForecastEl.empty();
+cityInput.val("");
+}
 
 
 
