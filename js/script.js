@@ -47,3 +47,38 @@ fetch (openweatheramp)
 });
 }
 
+var convertnputApi = function (city) {
+    var convertApi = 
+    "https://api.openweathermap.org/geo/1.0/direct?q=" + city +"&appid=a22fcda0659e95b539385ad289716ca4";
+  fetch(convertApi).then((res) => {
+    if (res.ok) {
+      res.json().then((data) => {
+        const LData = data[0];
+        const lat = LData.lat;
+        const lon = LData.lon;
+        saveCityName(city);
+        getWeatherApi(lat, lon);
+      });
+    } else {
+      alert("Please enter a city");
+    }
+  });
+};
+
+//shows data pulled for current day
+
+var displayToday = function (today) {
+  let todayWeather = today.today;
+  let todayDate = new Date(todayWeather.dt * 1000).toLocaleDateString();
+
+  todayName.innerHTML = `${city}:`.toUpperCase() + ` ${todayDate}`;
+  todayTemp.innerHTML = ` ${todaytWeather.temp}`;
+  todayHumid.innerHTML = ` ${todayWeather.humidity} %`;
+  todayWinds.innerHTML = ` ${todayWeather.wind_speed} MPH`;
+  todayIndex.innerHTML = ` ${todayWeather.uvi}`;
+
+  //need image to appear instead
+  let todayIcon = `${todayWeather.weather[0].icon}`;
+  let iconUrl = `https://openweathermap.org/img/wn/${todayIcon}@2x.png`;
+  todayIcon.innerHTML = "<img src=" + iconUrl + ">";
+};
