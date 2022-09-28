@@ -25,17 +25,17 @@
         <div class="row">
           <form id="formCont" class="col-lg-3">
             <h2>Search for a City:</h2>
-            <input id="userInp" type="text" placeholder="City Name" />
-            <button type="submit" id="userBtn">Search</button>
+            <input id="userInput" type="text" placeholder="City Name" />
+            <button type="submit" id="searchBTN">Search</button>
           </form>
 
           <div id="today" class="col-lg-8 border border-black mt-2 border-2">
             <h2 id="cityName"></h2>
-            <span id="currentIcon"></span>
-            <p>Temp:<span id="currentTemp"></span></p>
-            <p>Humidity:<span id="currentHumid"></span></p>
-            <p>Wind:<span id="currentWind"></span></p>
-            <p>UV index:<span id="currentIndex"></span></p>
+            <span id="todayIcon"></span>
+            <p>Temp:<span id="todayTemp"></span></p>
+            <p>Humidity:<span id="todayHumid"></span></p>
+            <p>Wind:<span id="todayWind"></span></p>
+            <p>UV index:<span id="todayIndex"></span></p>
           </div>
         </div>
       </section>
@@ -50,7 +50,7 @@
           <h2>5-Day Forecast:</h2>
 
           <div class="row" id="fiveDayCast">
-            <div class="future col-lg-2" id="day-1">
+            <div class="forecastDays col-lg-2" id="day-1">
               <h4 id="statusdate1"></h4>
               <p id="statusimage1"></p>
               <p>Temp:<span id="statustemp1"></span></p>
@@ -58,7 +58,7 @@
               <p>Humidity:<span id="statushumid1"></span></p>
             </div>
 
-            <div class="future col-lg-2" id="day-2">
+            <div class="forecastDays col-lg-2" id="day-2">
               <h4 id="statusdate2"></h4>
               <p id="statusimage2"></p>
               <p>Temp:<span id="statustemp2"></span></p>
@@ -66,7 +66,7 @@
               <p>Humidity:<span id="humid2"></span></p>
             </div>
 
-            <div class="future col-lg-2" id="day-3">
+            <div class="forecastDays col-lg-2" id="day-3">
               <h4 id="statusdate3"></h4>
               <p id="statusimage3"></p>
               <p>Temp:<span id="statustemp3"></span></p>
@@ -74,7 +74,7 @@
               <p>Humidity:<span id="statushumid3"></span></p>
             </div>
 
-            <div class="future col-lg-2" id="day-4">
+            <div class="forecastDays col-lg-2" id="day-4">
               <h4 id="statusdate4"></h4>
               <p id="statusimage4"></p>
               <p>Temp:<span id="statustemp4"></span></p>
