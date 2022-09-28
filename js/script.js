@@ -26,8 +26,24 @@ const forecastDays = document.querySelectorAll(".forecastDays");
 const fiveDate = document.querySelectorAll(".dateF");
 console.log(forecastDays);
 
+var seachArray = function (city) {
+    for (var i = 0; i < cityArray.length;i++) {
+        if (city.toUpperCase() === cityArray[i]) {
+            return -1;
+        }
+    }
+    return 1;
+};
 
+// calls weather API 
+var getWeatherAPI = function (lat, lon) {
+const openweathermap = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=hourly,alerts,minutely&appid=a22fcda0659e95b539385ad289716ca4`;
 
-
-
+fetch (openweatheramp) 
+.then ((res) => res.json())
+.then ((data) => {
+    console.log(data);
+    displayFuture(data.daily);
+});
+}
 
