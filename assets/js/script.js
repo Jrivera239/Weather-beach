@@ -1,6 +1,3 @@
-
-// joining ids selectors
-
 const today = document.querySelector("#today");
 const saveCity = document.querySelector("#saveCity");
 const fiveDayCast = document.querySelector("#fiveDayCast");
@@ -9,6 +6,8 @@ let userInput = document.querySelector("#userInput");
 let city = "";
 let cityArray = [];
 let clearHistory = document.querySelector("#clearHistory");
+// joining ids selectors
+
 
 // shows today's day //
 
@@ -23,7 +22,7 @@ const todayName = document.querySelector("#todayName");
 
 const fiveDay = document.querySelector("#fiveDayCast");
 const ForecastDays = document.querySelectorAll(".forecastDays");
-const fiveDate = document.querySelectorAll(".dateF");
+const fiveDate = document.querySelectorAll(".statusdate");
 console.log(ForecastDays);
 
 var seachArray = function (city) {
@@ -37,7 +36,7 @@ var seachArray = function (city) {
 
 // calls weather API //
 var getWeatherAPI = function (lat, lon) {
-const openweathermap = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=hourly,alerts,minutely&appid=a22fcda0659e95b539385ad289716ca4`;
+const openweathermap = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=hourly,alerts,minutely&appid=3dfaebbcd9a14c3ef80eefe16f4c68de`;
 
 fetch (openweathermap) 
 .then ((res) => res.json())
@@ -47,9 +46,9 @@ fetch (openweathermap)
 });
 }
 
-var convertnputApi = function (city) {
+var convertInputApi = function (city) {
     var convertApi = 
-    "https://api.openweathermap.org/geo/1.0/direct?q=" + city +"&appid=a22fcda0659e95b539385ad289716ca4";
+    "https://api.openweathermap.org/geo/1.0/direct?q=" + city +"3dfaebbcd9a14c3ef80eefe16f4c68de";
   fetch(convertApi).then((res) => {
     if (res.ok) {
       res.json().then((data) => {
@@ -57,7 +56,7 @@ var convertnputApi = function (city) {
         const lat = LData.lat;
         const lon = LData.lon;
         saveCityName(city);
-        getWeatherApi(lat, lon);
+        getWeatherAPI(lat, lon);
       });
     } else {
       alert("Please enter a city");
@@ -157,3 +156,15 @@ var loadCityClick = function (event) {
     convertInputApi(city);
   }
 };
+
+// saves data  on click from api //
+
+subBtn.addEventListener("click", formatCityName);
+document.addEventListener("click", loadCityClick);
+window.addEventListener("load", loadCityName);
+clearHistory.addEventListener("click", function (event) {
+event.preventDefault();
+cityArry = [];
+localStorage.removeItem("city");
+document.location.reload();
+});
