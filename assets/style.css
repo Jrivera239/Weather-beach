@@ -24,7 +24,8 @@ font-size: 50px;
 color: rgba(0, 0, 0, 0.767);
 }
 
-.future {
+.ForeCast {
 background-image:linear-gradient(160deg, rgba(240, 69, 69, 0.658) 23%, rgb(246, 225, 41) 67%);
-border: solid white;
+border: solid rgb(0, 0, 0);
+border-radius: 22px;
 }
