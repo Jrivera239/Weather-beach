@@ -126,6 +126,34 @@ var saveCityName = function (city) {
   userInput.value = "";
 };
 
+var appendToList = function (city, classList) {
+  var classList = document.createElement("li");
+  classList.setAttribute("class", "list-group-item");
+  classList.setAttribute("data-value", city);
+  classList.innerHTML = city;
+  document.querySelector(".list-group").appendChild(classList);
+};
+
+var loadCityName = function (classList) {
+  document.querySelector(".list-group").innerHTML = "";
+  cityArray = JSON.parse(localStorage.getItem("city"));
+  if (cityArray !== null) {
+    cityArray = JSON.parse(localStorage.getItem("city"));
+    for (i = 0; i < cityArray.length; i++) {
+      appendToList(cityArray[i]);
+    }
+    city = cityArray[i - 1];
+    convertInputApi(city);
+  }
+};
 
 
-
+var loadCityClick = function (event) {
+  let savedList = event.target.innerHTML;
+  if (event.target.matches("li")) {
+    city = savedList;
+    console.log(city);
+    console.log(event.target);
+    convertInputApi(city);
+  }
+};
