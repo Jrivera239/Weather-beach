@@ -1,31 +1,37 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
 body {
-margin: 0;
-padding: 0;
-font-family:Arial, Helvetica, sans-serif;
-background-color: rgb(255, 255, 255);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #6dd5fa, #2980b9);
+  color: white;
+  text-align: center;
+  padding-top: 50px;
 }
 
-#head {
-background-image: linear-gradient(160deg, rgb(240, 69, 69) 23%, rgb(246, 225, 41) 67%);  
-text-align: center;
-border: thin solid;
+.weather-container {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  margin: auto;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 
-#head h1 {
-padding: 13px;
-margin: 0;
-font-size: 50px;
-color: rgba(0, 0, 0, 0.767);
+input {
+  padding: 10px;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
 }
 
-.ForeCast {
-background-image:linear-gradient(160deg, rgba(240, 69, 69, 0.658) 23%, rgb(246, 225, 41) 67%);
-border: solid rgb(0, 0, 0);
-border-radius: 22px;
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
