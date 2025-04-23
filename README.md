@@ -20,7 +20,7 @@ The Weather App is a simple and intuitive web application that provides real-tim
 4. History: Saves unique searches in a list for future access.
 
 ## Technologies Used
-- JavaScrip: For handling API requests and dynamic UI updates.
+- JavaScript: For handling API requests and dynamic UI updates.
 - OpenWeatherMap API: For sourcing live weather data.
 - HTML/CSS: For structuring and styling the application.
 
@@ -33,5 +33,4 @@ cd weather-app
 open index.html
 ```
 
-## License
-This project is licensed under the MIT License 
+
